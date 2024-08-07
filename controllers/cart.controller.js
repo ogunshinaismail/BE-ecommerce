@@ -75,7 +75,11 @@ const removeCartItem = async(req, res) => {
     if (itemIndex > -1) {
       cart.items.splice(itemIndex, 1);
       await cart.save();
-      return res.status(200).json(cart.items).populate('items.product');
+      const updatedCart = await Cart.findOne({ user: user_id }).populate('items.product');
+
+      return res.status(200).json(updatedCart.items);
+      // return res.status(200).json(items);
+      // return res.status(200).json(cart.items).populate('items.product');
     } else {
       return res
         .status(404)

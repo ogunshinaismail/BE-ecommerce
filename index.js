@@ -10,6 +10,7 @@ const authRoute = require("./routes/auth")
 const categoryRoute = require("./routes/category")
 const cartRoute = require("./routes/cart")
 const testRoute = require("./routes/test")
+const index = require("./routes/index")
 
 const connect = mongoose.connect(process.env.mongoDBURL)
 
@@ -27,7 +28,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 app.use(express.json())
-
+app.use("/", index)
 app.use("/v1/auth", authRoute)
 app.use("/v1/products", productRoute)
 app.use("/v1/category", categoryRoute)
