@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const OrderSchema = new Schema({
-    product: [{ 
+    cart: [{ 
         type: Schema.Types.ObjectId, 
-        ref: 'CartItem', 
+        ref: 'Cart', 
         required: true 
     }],
     shipping_address_one: { 
@@ -15,6 +15,10 @@ const OrderSchema = new Schema({
         type: String, 
     },
     city: { 
+        type: String, 
+        required: true, 
+    },
+    state: { 
         type: String, 
         required: true, 
     },
@@ -33,6 +37,11 @@ const OrderSchema = new Schema({
     total_price: { 
         type: String, 
         required: true, 
+    },
+    status: { 
+        type: String, 
+        enum: ["pending", "approved", "shipping", "awaiting arrival", "delivered"],
+        default: "pending"
     },
     user: { 
         type: Schema.Types.ObjectId,
@@ -59,10 +68,10 @@ const OrderSchema = new Schema({
 //     },
 // });
 
-cartSchema.pre('save', function(next) {
-  this.updated_at = Date.now();
-  next();
-});
+// cartSchema.pre('save', function(next) {
+//   this.updated_at = Date.now();
+//   next();
+// });
 
 const Order = mongoose.model('Order', OrderSchema);
 module.exports = Order;

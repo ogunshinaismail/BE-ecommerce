@@ -10,7 +10,7 @@ const getCarts = async (req, res) => {
       return res
         .status(404)
         .send({ status: false, message: "Cart not found for this user" });
-    const cartItems = cart.items
+    const cartItems = cart
     res.status(200).json(cartItems)
   } catch (error) {
     res.status(400).json({message: error.message})
