@@ -7,7 +7,7 @@ const { isUserLoggedIn, adminsOnly } = require("../middlewares/middlewares")
 
 route.get('/', getCategory)
 route.get('/:id', getCategoryById)
-route.put('/:id', isUserLoggedIn, adminsOnly, updateCategory)
+route.patch('/:id', isUserLoggedIn, adminsOnly, updateCategory)
 route.post('/', isUserLoggedIn, adminsOnly, createCategory)
 route.delete('/:id', isUserLoggedIn, adminsOnly, deleteCategory)
 

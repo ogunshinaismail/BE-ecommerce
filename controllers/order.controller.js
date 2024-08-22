@@ -2,7 +2,7 @@ const Order = require("../models/order.model")
 
 const getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find({})
+        const orders = await Order.find({}).populate('shipping_id')
         res.status(200).json(orders)
     } catch (error) {
         res.status(400).json({message: error.message})
@@ -22,7 +22,7 @@ const getOrders = async (req, res) => {
 const getOrderById = async (req, res) => {
     const { id } = req.params
     try {
-        const orders = await Order.findById(id)
+        const orders = await Order.findById(id).populate('shipping_id')
         res.status(200).json(orders)
     } catch (error) {
         res.status(400).json({message: error.message})

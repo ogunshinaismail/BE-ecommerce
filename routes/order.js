@@ -7,6 +7,6 @@ route.get('/all', isUserLoggedIn, getAllOrders)
 route.get('/', isUserLoggedIn, getOrders)
 route.get('/:id', isUserLoggedIn, getOrderById)
 route.post('/', isUserLoggedIn, createOrder)
-route.put('/:id', isUserLoggedIn, updateStatus)
+route.patch('/:id', isUserLoggedIn, updateStatus)
 
 module.exports = route

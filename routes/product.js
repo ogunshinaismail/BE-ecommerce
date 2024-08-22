@@ -8,7 +8,7 @@ const { isUserLoggedIn, adminsOnly } = require("../middlewares/middlewares")
 route.get('/', getProduct)
 route.get('/:id', getProductById)
 route.post('/', isUserLoggedIn, adminsOnly, createProduct)
-route.put('/:id', isUserLoggedIn, updateProduct)
+route.patch('/:id', isUserLoggedIn, updateProduct)
 route.delete('/:id', isUserLoggedIn, deleteProduct) 
 
 module.exports = route
