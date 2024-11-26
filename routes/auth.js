@@ -7,4 +7,4 @@ route.post('/register', Register)
 route.post('/login', Login)
 route.get('/profile', isUserLoggedIn, Profile)
 
-module.exports = route
+module.exports = route  

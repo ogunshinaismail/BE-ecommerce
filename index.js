@@ -18,11 +18,21 @@ const index = require("./routes/index")
 
 const connect = mongoose.connect(process.env.mongoDBURL)
 
+// const corsOptions = {
+//     origin: "http://localhost:3000" || "*",
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+//     allowHeaders: [
+//         "Content-Type",
+//         "Authorization",
+//         "Access-Control-Allow-Credentials",
+//     ],
+// };
+
 const corsOptions = {
-    origin: "http://localhost:3000" || "*",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowHeaders: [
+    origin: "*", // Allow CORS from anywhere
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: [ // Correct property is `allowedHeaders` for headers
         "Content-Type",
         "Authorization",
         "Access-Control-Allow-Credentials",
@@ -30,6 +40,11 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions))
+
+app.use((req, res, next) => {
+    req.clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    next();
+});
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
