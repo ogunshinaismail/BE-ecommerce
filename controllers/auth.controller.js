@@ -5,8 +5,14 @@ const jwt = require('jsonwebtoken')
 const secret = process.env.JWT_SECRET
   
 const Register = async(req, res) => {
+    const { first_name, last_name, email, password } = req.body
+    if(!first_name) return res.status(400).send("first_name is required")
+    if(!last_name) return res.status(400).send("last_name is required")
+    if(!email) return res.status(400).send("email is required")
+    if(!password) return res.status(400).send("password is required")
+    
     const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(req.body.password, salt)
+    const hashedPassword = bcrypt.hashSync(password, salt)
     try {
         const user = await Auth.create({
             first_name: req.body.first_name,
